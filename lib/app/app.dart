@@ -1,19 +1,18 @@
+import 'package:clean_architecture/presentation/theme_manager.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
   MyApp._internal();
-
-  static final MyApp instance =
+  int appState = 0;
+  static  MyApp instance =
       MyApp._internal();
 
   factory MyApp() => instance;
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("data"),
-      ),
+    return MaterialApp(
+      theme: getApplicationTheme(),
     );
   }
 }
