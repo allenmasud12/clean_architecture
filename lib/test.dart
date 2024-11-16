@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../app/app.dart';
+import 'app/app.dart';
 
 class Test extends StatelessWidget {
   const Test({super.key});
