@@ -3,6 +3,7 @@ import 'package:clean_architecture/presentation/login/login_view.dart';
 import 'package:clean_architecture/presentation/main/main_view.dart';
 import 'package:clean_architecture/presentation/onboarding/onboarding_view.dart';
 import 'package:clean_architecture/presentation/register/register_view.dart';
+import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/store_details/store_details_view.dart';
 import 'package:flutter/material.dart';
 
@@ -43,9 +44,9 @@ static Route<dynamic>unDefinedRoute(){
    return MaterialPageRoute(builder: (_)=>
    Scaffold(
      appBar: AppBar(
-       title: const Text("No Route Found"),
+       title: const Text(AppString.noRouteFound),
      ),
-     body: const Text("No Route Found!"),
+     body: const Text(AppString.noRouteFound),
    )
    ) ;
 }
