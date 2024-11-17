@@ -27,7 +27,7 @@ class RouteGenerator{
       case Routes.loginRoute:
         return MaterialPageRoute(builder: (_)=> const LoginView());
       case Routes.onBoardingRoute:
-        return MaterialPageRoute(builder: (_)=> const OnBoardingView());
+        return MaterialPageRoute(builder: (_)=>  OnBoardingView());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_)=> const RegisterView());
       case Routes.forgetPasswordRoute:
@@ -44,9 +44,9 @@ static Route<dynamic>unDefinedRoute(){
    return MaterialPageRoute(builder: (_)=>
    Scaffold(
      appBar: AppBar(
-       title: const Text(AppString.noRouteFound),
+       title: Text(AppString.noRouteFound),
      ),
-     body: const Text(AppString.noRouteFound),
+     body: Text(AppString.noRouteFound),
    )
    ) ;
 }
