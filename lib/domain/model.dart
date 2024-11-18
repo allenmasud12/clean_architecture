@@ -9,7 +9,7 @@ class SliderObject{
 class User{
   String id;
   String name;
-  String numOfNotification;
+  int numOfNotification;
   User(this.id, this.name, this.numOfNotification);
 }
 
@@ -22,7 +22,7 @@ class Contact{
 }
 
 class Authentication{
-  User user;
-  Contact contact;
+  User? user;
+  Contact? contact;
   Authentication(this.user, this.contact);
 }

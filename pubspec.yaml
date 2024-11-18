@@ -16,6 +16,7 @@ dependencies:
   json_serializable: ^6.8.0
   retrofit_generator: ^9.1.5
   build_runner: ^2.4.13
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
