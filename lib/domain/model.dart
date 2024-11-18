@@ -5,3 +5,24 @@ class SliderObject{
 
  SliderObject(this.title, this.subTitle, this.image);
 }
+
+class User{
+  String id;
+  String name;
+  String numOfNotification;
+  User(this.id, this.name, this.numOfNotification);
+}
+
+class Contact{
+  String email;
+  String phone;
+  String link;
+
+  Contact(this.email, this.phone, this.link);
+}
+
+class Authentication{
+  User user;
+  Contact contact;
+  Authentication(this.user, this.contact);
+}
