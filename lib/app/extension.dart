@@ -1,4 +1,4 @@
-import '../mapper/mapper.dart';
+import '../data/mapper/mapper.dart';
 
 ///extension on String
 extension NonNullString on String?{

@@ -17,6 +17,8 @@ dependencies:
   retrofit_generator: ^9.1.5
   build_runner: ^2.4.13
   dartz: ^0.10.1
+  internet_connection_checker_plus: ^2.5.2
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

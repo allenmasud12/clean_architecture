@@ -1,7 +1,9 @@
-import 'package:clean_architecture/data/network/extension.dart';
-import 'package:clean_architecture/data/response.dart';
+
+
+import 'package:clean_architecture/app/extension.dart';
 
 import '../../domain/model.dart';
+import '../response/response.dart';
 
 /// to convert response into a non nullable object (model)
 

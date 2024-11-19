@@ -1,7 +1,7 @@
 import 'package:clean_architecture/domain/model.dart';
 import 'package:dartz/dartz.dart';
 
-import '../app/failure.dart';
+import '../data/network/failure.dart';
 import '../data/request/request.dart';
 
 abstract class Repository{
