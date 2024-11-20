@@ -1,0 +1,30 @@
+import 'package:clean_architecture/app/constant.dart';
+import 'package:dio/dio.dart';
+
+
+const String APPLICATION_JSON = "application/json";
+const String CONTENT_TYPE = "content_type";
+const String ACCEPT = "accept";
+const String AUTHORIZATION = "authorization";
+const String DEFAULT_LANGUAGE = "language";
+
+class DioFactory{
+  Future<Dio>getDio()async{
+    Dio dio = Dio();
+int _timeOut = 60 * 1000; //1 min
+    Map<String, String> headers = {
+    CONTENT_TYPE:APPLICATION_JSON,
+      ACCEPT:APPLICATION_JSON,
+      APPLICATION_JSON: Constant.token,
+      DEFAULT_LANGUAGE:"en" //todo get lang from api
+    };
+
+    dio.options = BaseOptions(
+      baseUrl: Constant.baseUrl,
+      connectTimeout: Duration(milliseconds: _timeOut),
+      receiveTimeout: Duration(milliseconds: _timeOut),
+      headers: headers
+    );
+    return dio;
+}
+}
