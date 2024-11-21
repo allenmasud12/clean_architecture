@@ -52,11 +52,15 @@ AuthenticationResponse _$AuthenticationResponseFromJson(
       json['contact'] == null
           ? null
           : ContactResponse.fromJson(json['contact'] as Map<String, dynamic>),
-    );
+    )
+      ..status = (json['status'] as num?)?.toInt()
+      ..message = json['message'] as String?;
 
 Map<String, dynamic> _$AuthenticationResponseToJson(
         AuthenticationResponse instance) =>
     <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
       'user': instance.user,
       'contact': instance.contact,
     };

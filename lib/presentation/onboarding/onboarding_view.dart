@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../domain/model/model.dart';
 import '../resources/assets_manager.dart';
+import '../resources/routes_manager.dart';
 import '../resources/string_manager.dart';
 import '../resources/values_manager.dart';
 
@@ -77,7 +78,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-
+                    Navigator.pushReplacementNamed(
+                        context, Routes.loginRoute);
                   },
                   child: Text(
                     AppString.skip,
