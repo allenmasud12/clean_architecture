@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:clean_architecture/domain/model.dart';
+import 'package:clean_architecture/domain/model/model.dart';
 import 'package:clean_architecture/presentation/base/base_view_model.dart';
 
 import '../resources/assets_manager.dart';

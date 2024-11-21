@@ -5,8 +5,8 @@ import 'package:clean_architecture/data/network/error_handler.dart';
 import 'package:clean_architecture/data/network/failure.dart';
 import 'package:clean_architecture/data/network/network_info.dart';
 import 'package:clean_architecture/data/request/request.dart';
-import 'package:clean_architecture/domain/model.dart';
-import 'package:clean_architecture/domain/repository.dart';
+import 'package:clean_architecture/domain/model/model.dart';
+import 'package:clean_architecture/domain/repository/repository.dart';
 import 'package:dartz/dartz.dart';
 
 class RepositoryImpl extends Repository {
