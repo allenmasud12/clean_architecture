@@ -1,3 +1,8 @@
+import 'package:clean_architecture/app/di.dart';
+import 'package:clean_architecture/data/data_source/data_source.dart';
+import 'package:clean_architecture/data/repository/repository_impl.dart';
+import 'package:clean_architecture/domain/repository/repository.dart';
+import 'package:clean_architecture/domain/usecase/login_usecase.dart';
 import 'package:clean_architecture/presentation/login/login_view_model.dart';
 import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
@@ -17,7 +22,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _viewModel = LoginViewModel(null);
+  final LoginViewModel _viewModel = instance<LoginViewModel>();
 
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
