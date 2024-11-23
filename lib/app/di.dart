@@ -43,13 +43,15 @@ Future<void> initAppModule() async {
       () => RepositoryImpl(instance(), instance()));
 }
 
-initLoginModule() {
-  if(GetIt.I.isRegistered<LoginUseCase>()) {
+void initLoginModule() {
+  if (!GetIt.I.isRegistered<LoginUseCase>()) {
     instance.registerFactory<LoginUseCase>(
-          () => LoginUseCase(instance()));
+          () => LoginUseCase(instance()),
+    );
 
+    // Register the LoginViewModel
     instance.registerFactory<LoginViewModel>(
-            () => LoginViewModel(instance()));
+          () => LoginViewModel(instance()),
+    );
   }
-
 }

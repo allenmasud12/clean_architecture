@@ -1,17 +1,10 @@
 import 'package:clean_architecture/app/di.dart';
-import 'package:clean_architecture/data/data_source/data_source.dart';
-import 'package:clean_architecture/data/repository/repository_impl.dart';
-import 'package:clean_architecture/domain/repository/repository.dart';
-import 'package:clean_architecture/domain/usecase/login_usecase.dart';
 import 'package:clean_architecture/presentation/login/login_view_model.dart';
 import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../../app/app_prefs.dart';
 import '../resources/routes_manager.dart';
 
 class LoginView extends StatefulWidget {

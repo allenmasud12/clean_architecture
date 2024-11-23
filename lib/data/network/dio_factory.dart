@@ -5,10 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 const String APPLICATION_JSON = "application/json";
-const String CONTENT_TYPE = "content_type";
-const String ACCEPT = "accept";
-const String AUTHORIZATION = "authorization";
-const String DEFAULT_LANGUAGE = "language";
+const String CONTENT_TYPE = "Content-Type";
+const String ACCEPT = "Accept";
+const String AUTHORIZATION = "Authorization";
+const String DEFAULT_LANGUAGE = "Language";
 
 class DioFactory {
   final AppPreferences _appPreferences;
@@ -17,26 +17,43 @@ class DioFactory {
 
   Future<Dio> getDio() async {
     Dio dio = Dio();
-    int timeOut = 60 * 1000; //1 min
-    String language = await _appPreferences.getAppLanguage();
+    const int timeoutMilliseconds = 60 * 1000; // 1 minute
+
+    String language = await _appPreferences.getAppLanguage() ?? "en";
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
       ACCEPT: APPLICATION_JSON,
-      APPLICATION_JSON: Constant.token,
-      DEFAULT_LANGUAGE: language //todo get lang from api
+      AUTHORIZATION: "Bearer ${Constant.token}",
+      DEFAULT_LANGUAGE: language,
     };
 
     dio.options = BaseOptions(
-        baseUrl: Constant.baseUrl,
-        connectTimeout: Duration(milliseconds: timeOut),
-        receiveTimeout: Duration(milliseconds: timeOut),
-        headers: headers);
-    if (kReleaseMode) {
-      print("release mode no logs");
-    } else {
+      baseUrl: Constant.baseUrl,
+      connectTimeout: Duration(milliseconds: timeoutMilliseconds),
+      receiveTimeout: Duration(milliseconds: timeoutMilliseconds),
+      headers: headers,
+    );
+
+    if (!kReleaseMode) {
       dio.interceptors.add(PrettyDioLogger(
-          requestHeader: true, requestBody: true, responseHeader: true));
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        responseBody: true,
+        error: true,
+        compact: false,
+        maxWidth: 90,
+      ));
     }
+
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onError: (DioError e, handler) {
+          print("DioError: ${e.response?.data}");
+          handler.next(e);
+        },
+      ),
+    );
 
     return dio;
   }
