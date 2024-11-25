@@ -16,7 +16,7 @@ class LoadingState extends FlowState {
   StateRenderType stateRenderType;
   String message;
 
-  LoadingState({required this.stateRenderType, required this.message});
+  LoadingState({required this.stateRenderType, String? message}): message = message ?? AppString.loading;
 
   @override
   String getMessage() => message;
@@ -80,7 +80,7 @@ extension FlowStateExtension on FlowState {
   Widget getScreenWidget(BuildContext context, Widget contentScreenWidget,
       Function retryActionFuncation) {
     switch(runtimeType){
-      case LoadingState _:{
+      case LoadingState:{
           if(getStateRenderType() == StateRenderType.POPUP_LOADING_STATE){
             // showing popup dialog
             showPopUp(context, getStateRenderType(), getMessage());
@@ -93,7 +93,7 @@ extension FlowStateExtension on FlowState {
                 retryActionFuncation: retryActionFuncation);
           }
       }
-      case ErrorState _:{
+      case ErrorState :{
         dismissDialog(context);
         if (getStateRenderType() == StateRenderType.POPUP_ERROR_STATE) {
           // showing popup dialog
@@ -108,17 +108,17 @@ extension FlowStateExtension on FlowState {
               retryActionFuncation: retryActionFuncation);
         }
       }
-      case ContentState _:{
+      case ContentState :{
         dismissDialog(context);
         return contentScreenWidget;
       }
-      case EmptyState _:{
+      case EmptyState :{
         return StateRender(
             stateRenderType: getStateRenderType(),
             message: getMessage(),
             retryActionFuncation: retryActionFuncation);
       }
-      case SuccessState:
+      case SuccessState :
         {
           // i should check if we are showing loading popup to remove it before showing success popup
           dismissDialog(context);

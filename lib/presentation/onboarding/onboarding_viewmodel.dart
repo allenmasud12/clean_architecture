@@ -7,17 +7,17 @@ import '../resources/assets_manager.dart';
 import '../resources/string_manager.dart';
 
 class OnBoardingViewModel
-    implements
-        BaseViewModel,
-        OnBoardingViewModelInput,
-        OnBoardingViewModelOutput {
-  final StreamController<SliderViewObject> _streamController = StreamController<SliderViewObject>();
+    implements OnBoardingViewModelInput, OnBoardingViewModelOutput {
+  final StreamController<SliderViewObject> _streamController =
+  StreamController<SliderViewObject>();
   late final List<SliderObject> _list;
   int _currentIndex = 0;
 
   @override
   void dispose() {
-    _streamController.close();
+    if (!_streamController.isClosed) {
+      _streamController.close();
+    }
   }
 
   @override
@@ -86,6 +86,7 @@ class OnBoardingViewModel
       );
     }
   }
+
 }
 
 abstract class OnBoardingViewModelInput {

@@ -1,4 +1,5 @@
 import 'package:clean_architecture/app/di.dart';
+import 'package:clean_architecture/presentation/common/state_render/state_render_impl.dart';
 import 'package:clean_architecture/presentation/login/login_view_model.dart';
 import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
@@ -39,8 +40,17 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.white,
-      body:
-      _getContentWidget()
+      body: StreamBuilder<FlowState>(
+          stream: _viewModel.outputState,
+        builder: (context, snapshot) {
+          return snapshot.data?.getScreenWidget(context, _getContentWidget(),
+                  () {
+                _viewModel.login();
+              }) ??
+              _getContentWidget();
+        },
+      )
+      // _getContentWidget()
 
     );
   }

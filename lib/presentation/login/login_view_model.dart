@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:clean_architecture/domain/usecase/login_usecase.dart';
 import 'package:clean_architecture/presentation/base/base_view_model.dart';
+import 'package:clean_architecture/presentation/common/state_render/state_render.dart';
+import 'package:clean_architecture/presentation/common/state_render/state_render_impl.dart';
+import 'package:flutter/material.dart';
 
 import '../common/freezed_data_classes.dart';
 
@@ -14,8 +17,7 @@ class LoginViewModel extends BaseViewModel
   StreamController.broadcast();
   final StreamController<void> _isAllInputsValidStreamController =
   StreamController.broadcast();
-  final StreamController<bool> isUserLoggedInSuccessfullyStreamController =
-  StreamController.broadcast();
+  StreamController isUserLoggedInSuccessfullyStreamController = StreamController<String>();
 
   LoginObject _loginObject = LoginObject("", "");
   final LoginUseCase? _loginUseCase;
@@ -33,7 +35,9 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  void start() {}
+  void start() {
+    inputState.add(ContentState());
+  }
 
   @override
   Sink get inputPassword => _passwordStreamController.sink;
@@ -45,31 +49,67 @@ class LoginViewModel extends BaseViewModel
   Sink get inputIsAllInputValid => _isAllInputsValidStreamController.sink;
 
   @override
-  login() async {
-    if (_loginUseCase == null) {
-      print("LoginUseCase is not initialized!");
+  Future<void> login() async {
+    if (_loginUseCase == null || _loginObject == null) {
+      print("callllllllll");
+      inputState.add(ErrorState(
+          StateRenderType.POPUP_ERROR_STATE, "Invalid login setup"));
       return;
     }
 
-    // Call the use case
-    final result = await _loginUseCase!.execute(
-      LoginUseCaseInput(_loginObject.userName, _loginObject.password),
-    );
+    // Emit loading state
+    inputState.add(
+        LoadingState(stateRenderType: StateRenderType.POPUP_LOADING_STATE));
+    print("callllllllll2");
+    // Execute the use case
+    (await _loginUseCase!.execute(
+        LoginUseCaseInput(_loginObject.userName, _loginObject.password)))
+        .fold(
+            (failure) {
+          // Handle failure
+          inputState.add(ErrorState(
+              StateRenderType.POPUP_ERROR_STATE, failure.message));
+        },
+            (data) {
+              print("callllllllll3");
+          // Handle success
+          inputState.add(ContentState());
 
-    // Handle result using fold
-    result.fold(
-          (failure) {
-        // Left (failure)
-        print("Login failed: ${failure.message}");
-        isUserLoggedInSuccessfullyStreamController.add(false);
-      },
-          (authentication) {
-        // Right (success)
-        print("Login successful: ${authentication.user?.name}");
-        isUserLoggedInSuccessfullyStreamController.add(true);
-      },
-    );
+          // Notify login success
+          if (!isUserLoggedInSuccessfullyStreamController.isClosed) {
+            isUserLoggedInSuccessfullyStreamController.add("abcdefgh");
+          }
+        });
   }
+
+
+  // @override
+  // login() async {
+  //   CircularProgressIndicator();
+  //   if (_loginUseCase == null) {
+  //     print("LoginUseCase is not initialized!");
+  //     return;
+  //   }
+  //
+  //   // Call the use case
+  //   final result = await _loginUseCase!.execute(
+  //     LoginUseCaseInput(_loginObject.userName, _loginObject.password),
+  //   );
+  //
+  //   // Handle result using fold
+  //   result.fold(
+  //         (failure) {
+  //       // Left (failure)
+  //       print("Login failed: ${failure.message}");
+  //       isUserLoggedInSuccessfullyStreamController.add(false);
+  //     },
+  //         (authentication) {
+  //       // Right (success)
+  //       print("Login successful: ${authentication.user?.name}");
+  //       isUserLoggedInSuccessfullyStreamController.add(true);
+  //     },
+  //   );
+  // }
 
   @override
   Stream<bool> get outputIsPasswordValid =>
