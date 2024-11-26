@@ -1,3 +1,5 @@
+import 'package:clean_architecture/app/app_prefs.dart';
+import 'package:clean_architecture/app/di.dart';
 import 'package:clean_architecture/presentation/onboarding/onboarding_viewmodel.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +23,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController _pageController = PageController(initialPage: 0);
 
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
 
   _bind() {
-    print("eeeeeeeeeeeeeeeeeee");
+    _appPreferences.setOnBoardingScreenViewed();
     _viewModel.start();
   }
 

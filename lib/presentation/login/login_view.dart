@@ -1,3 +1,4 @@
+import 'package:clean_architecture/app/app_prefs.dart';
 import 'package:clean_architecture/app/di.dart';
 import 'package:clean_architecture/presentation/common/state_render/state_render_impl.dart';
 import 'package:clean_architecture/presentation/login/login_view_model.dart';
@@ -6,6 +7,7 @@ import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import '../resources/routes_manager.dart';
 
 class LoginView extends StatefulWidget {
@@ -17,6 +19,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final LoginViewModel _viewModel = instance<LoginViewModel>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -28,6 +31,12 @@ class _LoginViewState extends State<LoginView> {
         .addListener(() => _viewModel.setUserName(_userNameController.text));
     _passwordController
         .addListener(() => _viewModel.setPassword(_passwordController.text));
+    _viewModel.isUserLoggedInSuccessfullyStreamController.stream.listen((isSuccessLoggedIn){
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        _appPreferences.setIsUserLoggedIn();
+        Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+      });
+    });
   }
 
   @override
