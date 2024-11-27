@@ -12,6 +12,9 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../domain/usecase/forgot_password_usecase.dart';
+import '../presentation/forget_password/forgot_password_viewmodel.dart';
+
 final instance = GetIt.instance;
 
 Future<void> initAppModule() async {
@@ -53,5 +56,14 @@ void initLoginModule() {
     instance.registerFactory<LoginViewModel>(
           () => LoginViewModel(instance()),
     );
+  }
+}
+
+initForgotPasswordModule() {
+  if (!GetIt.I.isRegistered<ForgotPasswordUseCase>()) {
+    instance.registerFactory<ForgotPasswordUseCase>(
+            () => ForgotPasswordUseCase(instance()));
+    instance.registerFactory<ForgotPasswordViewModel>(
+            () => ForgotPasswordViewModel(instance()));
   }
 }

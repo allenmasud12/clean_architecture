@@ -18,4 +18,7 @@ factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClient;
     @Field("imei") String imei,
     @Field("device_type") String deviceType,
     );
+
+@POST("/auth/forgetpassword")
+Future<ForgotPasswordResponse> forgotPassword(@Field("email") String email);
 }

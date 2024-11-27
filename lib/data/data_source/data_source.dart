@@ -6,12 +6,19 @@ import '../response/response.dart';
 
 abstract class RemoteDataSource{
  Future<AuthenticationResponse> login(LoginRequest loginRequest);
+ Future<ForgotPasswordResponse> forgotPassword(String email);
 }
 
 class RemoteDataSourceImplementer implements RemoteDataSource{
   final AppServiceClient _appServiceClient;
 
   RemoteDataSourceImplementer(this._appServiceClient);
+
+  @override
+  Future<ForgotPasswordResponse> forgotPassword(String email) async {
+    return await _appServiceClient.forgotPassword(email);
+  }
+
 
   @override
   Future<AuthenticationResponse> login(LoginRequest loginRequest)async {

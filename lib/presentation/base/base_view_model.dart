@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:clean_architecture/presentation/common/state_render/state_render_impl.dart';
 
 abstract class BaseViewModel implements  BaseViewModelInput , BaseViewModelOutput{
-StreamController _inputStateStreamController = StreamController<FlowState>.broadcast();
+final StreamController _inputStateStreamController = StreamController<FlowState>.broadcast();
 
 @override
 
