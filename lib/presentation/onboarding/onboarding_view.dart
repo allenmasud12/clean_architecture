@@ -2,6 +2,7 @@ import 'package:clean_architecture/app/app_prefs.dart';
 import 'package:clean_architecture/app/di.dart';
 import 'package:clean_architecture/presentation/onboarding/onboarding_viewmodel.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -85,7 +86,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         context, Routes.loginRoute);
                   },
                   child: Text(
-                    AppString.skip,
+                    AppString.skip.tr(),
                     textAlign: TextAlign.end,
                   ),
                 ),

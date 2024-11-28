@@ -1,3 +1,4 @@
+import 'package:clean_architecture/presentation/common/state_render/state_render.dart';
 import 'package:clean_architecture/presentation/main/home_page.dart';
 import 'package:clean_architecture/presentation/main/notifactions_page.dart';
 import 'package:clean_architecture/presentation/main/search_page.dart';
@@ -5,6 +6,7 @@ import 'package:clean_architecture/presentation/main/settings_page.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MainView extends StatefulWidget {
@@ -22,13 +24,13 @@ class _MainViewState extends State<MainView> {
     const SettingsPage()
   ];
   List<String> titles = [
-    AppString.home,
-    AppString.search,
-    AppString.notifications,
-    AppString.settings
+    AppString.home.tr(),
+    AppString.search.tr(),
+    AppString.notifications.tr(),
+    AppString.settings.tr()
   ];
 
-  var _title = AppString.home;
+  var _title = AppString.home.tr();
  var  _currentIndex = 0;
 
 

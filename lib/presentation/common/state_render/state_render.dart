@@ -1,10 +1,12 @@
 import 'package:clean_architecture/data/network/failure.dart';
+import 'package:clean_architecture/presentation/forget_password/forget_password_view.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/font_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/resources/style_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -55,14 +57,14 @@ class StateRender extends StatelessWidget {
           return _getPopupDialog(context, [
             _getAnimatedImage(JsonAssets.error),
             _getMessage(message),
-            _getRetryButton(AppString.ok, context)
+            _getRetryButton(AppString.ok.tr(), context)
           ]);
       case StateRenderType.POPUP_SUCCESS:
         return _getPopupDialog(context, [
           _getAnimatedImage(JsonAssets.success),
           _getMessage(title),
           _getMessage(message),
-          _getRetryButton(AppString.ok, context)
+          _getRetryButton(AppString.ok.tr(), context)
         ]);
       case StateRenderType.FULL_SCREEN_LOADING_STATE:
         return _getItemsInColumn([_getAnimatedImage(JsonAssets.loading), _getMessage(message)]);
@@ -70,7 +72,7 @@ class StateRender extends StatelessWidget {
         return _getItemsInColumn([
           _getAnimatedImage(JsonAssets.error),
           _getMessage(failure.message),
-          _getRetryButton(AppString.retry_again, context)
+          _getRetryButton(AppString.retry_again.tr(), context)
         ]);
       case StateRenderType.CONTENT_ERROR_STATE:
       return Container();

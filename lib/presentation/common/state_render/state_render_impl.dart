@@ -1,5 +1,6 @@
 import 'package:clean_architecture/data/mapper/mapper.dart';
 import 'package:clean_architecture/presentation/common/state_render/state_render.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -125,7 +126,7 @@ extension FlowStateExtension on FlowState {
 
           // show popup
           showPopUp(context, StateRenderType.POPUP_SUCCESS, getMessage(),
-              title: AppString.success);
+              title: AppString.success.tr());
           // return content ui of the screen
           return contentScreenWidget;
         }
@@ -137,6 +138,7 @@ extension FlowStateExtension on FlowState {
 
 dismissDialog(BuildContext context) {
   if (_isThereCurrentDialogShowing(context)) {
+    // Navigator.of(context).pop();
     Navigator.of(context, rootNavigator: true).pop(true);
   }
 }

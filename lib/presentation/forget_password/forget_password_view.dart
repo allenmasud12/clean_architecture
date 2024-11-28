@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../app/di.dart';
 import '../common/state_render/state_render_impl.dart';
@@ -100,7 +101,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                           onPressed: (snapshot.data ?? false)
                               ? () => _viewModel.forgotPassword()
                               : null,
-                          child: const Text(AppString.resetPassword)),
+                          child: Text(AppString.resetPassword.tr())),
                     );
                   },
                 ),

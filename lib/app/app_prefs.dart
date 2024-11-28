@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:clean_architecture/presentation/resources/language_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +23,29 @@ class AppPreferences {
     }
   }
 
+  Future<void> setLanguageChanged() async {
+    String currentLanguage = await getAppLanguage();
+    if (currentLanguage == LanguageType.BANGLA.getValue()) {
+      // save prefs with english lang
+      _preferences.setString(
+          PREFS_KEY_LANG, LanguageType.ENGLISH.getValue());
+    } else {
+      // save prefs with arabic lang
+      _preferences.setString(
+          PREFS_KEY_LANG, LanguageType.BANGLA.getValue());
+    }
+  }
 
+  Future<Locale> getLocal() async {
+    String currentLanguage = await getAppLanguage();
+    if (currentLanguage == LanguageType.BANGLA.getValue()) {
+      // return arabic local
+      return BANGLA_LOCAL;
+    } else {
+      // return english local
+      return ENGLISH_LOCAL;
+    }
+  }
 
 
 
