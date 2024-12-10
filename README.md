@@ -1,17 +1,19 @@
-# clean_architecture
+# Clean Architecture Flutter Project
 
-A new Flutter project.
-flutter pub run build_runner build --delete-conflicting-outputs
+## Features
+- Data Layer: API calls and Repository implementation.
+- Domain Layer: Use cases and entities.
+- Presentation Layer: UI implementation with GetX.
+- Dependency Injection using `get_it`.
 
-## Getting Started
+## How to Run
+1. Clone the repository.
+2. Run `flutter pub get`.
+3. Use `flutter run` to start the app.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Plugins Used
+- `dio` for API calls.
+- `retrofit` for declarative API client.
+- `get_it` for dependency injection.
+- `freezed` for model classes.
+- `shared_preferences` for local storage.
